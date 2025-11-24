@@ -1,0 +1,36 @@
+#include <iostream>
+using namespace std;
+
+long long power(long long a, long long b, long long p) {
+    long long res = 1;
+    while (b > 0) {
+        res = (res * a) % p;
+        b--;
+    }
+    return res;
+}
+
+int main() {
+    long long p, g, a, b;
+
+    cout << "Enter prime p: ";
+    cin >> p;
+
+    cout << "Enter base g: ";
+    cin >> g;
+
+    cout << "Alice private key a: ";
+    cin >> a;
+
+    cout << "Bob private key b: ";
+    cin >> b;
+
+    long long A = power(g, a, p);   // Alice sends A
+    long long B = power(g, b, p);   // Bob sends B
+
+    long long keyA = power(B, a, p);
+    long long keyB = power(A, b, p);
+
+    cout << "\nShared key = " << keyA;
+    return 0;
+}
